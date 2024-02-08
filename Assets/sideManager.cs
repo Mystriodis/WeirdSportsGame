@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class sideManager : MonoBehaviour
 {
-
     //acts as the game manager for each player
     //does so by managing and storing the "state" variable 
     //possible states: selection, move, syringe
@@ -13,7 +12,7 @@ public class sideManager : MonoBehaviour
     [SerializeField] private pillSelection selectionScript;
     [SerializeField] private pillMove moveScript;
 
-    public string state = "selection"; //
+    public string state = "";
 
     // Start is called before the first frame update
     void Start()

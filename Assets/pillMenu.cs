@@ -5,12 +5,12 @@ using UnityEngine;
 public class pillMenu : MonoBehaviour
 {
     [SerializeField] GameObject[] pills;
-    private int currentIndex;
+    private int currentIndex = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        updateDisplay();
     }
 
     // Update is called once per frame
