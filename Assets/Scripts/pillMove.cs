@@ -66,4 +66,5 @@ public class pillMove : MonoBehaviour
 
         return rotateDirection;
     }
+
 }

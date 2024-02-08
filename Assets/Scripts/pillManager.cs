@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class sideManager : MonoBehaviour
+public class pillManager : MonoBehaviour
 {
     //acts as the game manager for each player
     //does so by managing and storing the "state" variable 
@@ -11,6 +11,7 @@ public class sideManager : MonoBehaviour
     //these scripts mainly just pass through input to other scripts
     [SerializeField] private pillSelection selectionScript;
     [SerializeField] private pillMove moveScript;
+    [SerializeField] private Transform defaultPillSpawn;
 
     public string state = "";
 
@@ -31,5 +32,11 @@ public class sideManager : MonoBehaviour
         state = newState;
         selectionScript.state = newState;
         moveScript.state = newState;
+    }
+
+    public void switchToMove(GameObject pillPrefab)
+    {
+        moveScript.currentPill = Instantiate(pillPrefab, defaultPillSpawn.position, Quaternion.identity);
+        switchState("move");
     }
 }
