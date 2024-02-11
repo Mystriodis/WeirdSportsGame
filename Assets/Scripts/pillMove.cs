@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class pillMove : MonoBehaviour
 {
-    //controlls pill movement
+    //controls pill movement
     public GameObject currentPill;
     public string state;
 
