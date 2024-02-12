@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +9,7 @@ public class pillSelection : MonoBehaviour
 
     public string state;
     [SerializeField] UnityEvent scrollUp, scrollDown;
+    [SerializeField] pillMenu pillMenu;
 
 
     // Start is called before the first frame update
@@ -24,6 +24,8 @@ public class pillSelection : MonoBehaviour
         if (state != "selection") return;
 
         scroll();
+        confirm();
+
     }
 
     private void scroll()
@@ -41,7 +43,11 @@ public class pillSelection : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            
+            //get prefab
+            GameObject pillObject = pillMenu.confirm();
+
+            //switch state to "move"
+            GetComponent<pillManager>().switchToMove(pillObject);
         }
     }
 }

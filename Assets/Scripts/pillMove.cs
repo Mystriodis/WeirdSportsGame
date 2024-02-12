@@ -5,8 +5,13 @@ using UnityEngine;
 public class pillMove : MonoBehaviour
 {
     //controls pill movement
+    //
+    //To Add: continuous movement on button hold
+
     public GameObject currentPill;
     public string state;
+    private Vector2 relativePosition;
+    public Vector2 gridSize;
 
     // Start is called before the first frame update
     void Start()
@@ -29,23 +34,37 @@ public class pillMove : MonoBehaviour
 
     private Vector2 inputDirection()
     {
+        //Gets direction from input, also checks using isOutOfBounds to see whether or not the cursor can be moved upwards
+        //!!! only accounts for the cursor position, this method means that the actual pill can be moved outwards
+
         Vector2 direction = Vector2.zero;
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            direction = Vector2.up;
+            if (isOutOfBounds(Vector2.up)) return Vector2.zero;
 
+            direction = Vector2.up;
+            relativePosition += Vector2.up;
         } else if (Input.GetKeyDown(KeyCode.S))
         {
+            if (isOutOfBounds(Vector2.down)) return Vector2.zero;
+
             direction = Vector2.down;
+            relativePosition += Vector2.down;
 
         } else if (Input.GetKeyDown(KeyCode.D))
         {
+            if (isOutOfBounds(Vector2.right)) return Vector2.zero;
+
             direction = Vector2.right;
+            relativePosition += Vector2.right;
 
         } else if (Input.GetKeyDown(KeyCode.A))
         {
+            if (isOutOfBounds(Vector2.left)) return Vector2.zero;
+
             direction = Vector2.left;
+            relativePosition += Vector2.left;
         }
 
         return direction;
@@ -65,5 +84,37 @@ public class pillMove : MonoBehaviour
         }
 
         return rotateDirection;
+    }
+
+    private bool isOutOfBounds(Vector2 direction)
+    {
+        //takes a vector2 direction and checks if cursor can move in that direction 
+        //returns true if move is going to be out of bounds
+        if (direction == Vector2.up)
+        {
+            return relativePosition.y + 1 > gridSize.y;
+        }
+
+        if (direction == Vector2.down)
+        {
+            return relativePosition.y - 1 < -gridSize.y;
+        }
+
+        if (direction == Vector2.right)
+        {
+            return relativePosition.x + 1 > gridSize.x;
+        }
+
+        if (direction == Vector2.left)
+        {
+            return relativePosition.x - 1 < -gridSize.x;
+        }
+
+        return true;
+    }
+
+    public void newPill()
+    {
+        relativePosition = Vector2.zero;
     }
 }
