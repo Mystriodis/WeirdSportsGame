@@ -171,6 +171,7 @@ MonoBehaviour:
   - {fileID: 1192922371}
   - {fileID: 599380226}
   - {fileID: 972881410}
+  currentIndex: 0
 --- !u!1 &163122539
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,8 +213,8 @@ GameObject:
   m_Component:
   - component: {fileID: 301500391}
   - component: {fileID: 301500392}
-  - component: {fileID: 301500393}
   - component: {fileID: 301500394}
+  - component: {fileID: 301500395}
   m_Layer: 0
   m_Name: pillController
   m_TagString: Untagged
@@ -250,23 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentPill: {fileID: 0}
   state: 
---- !u!114 &301500393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301500390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3b9f8a01daa222428386544e3660311, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectionScript: {fileID: 301500394}
-  moveScript: {fileID: 301500392}
-  gridCenter: {fileID: 163122540}
-  gridSize: {x: 4, y: 6}
-  state: 
+  gridSize: {x: 0, y: 0}
 --- !u!114 &301500394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,6 +296,23 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   pillMenu: {fileID: 122205020}
+--- !u!114 &301500395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301500390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b5d774ec23be84eaa2be304d0b68e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionScript: {fileID: 301500394}
+  moveScript: {fileID: 301500392}
+  gridCenter: {fileID: 163122540}
+  gridSize: {x: 4, y: 6}
+  state: 
 --- !u!1 &599380226
 GameObject:
   m_ObjectHideFlags: 0
