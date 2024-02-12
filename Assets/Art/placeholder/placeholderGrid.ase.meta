@@ -95,7 +95,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638428420973026697
+  platformSettingsDirtyTick: 638430110882701064
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -128,8 +128,8 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 31
-      height: 31
+      width: 27
+      height: 39
     spriteID: 7e311ec59fb8ed9408f8a2921eabea58
     spriteBone: []
     spriteOutline: []
@@ -151,10 +151,10 @@ ScriptedImporter:
     - name: placeholderGrid
       frameIndex: 0
       cellRect:
-        x: 0
+        x: 2
         y: 0
-        width: 31
-        height: 31
+        width: 27
+        height: 39
       spriteId: 7e311ec59fb8ed9408f8a2921eabea58
     linkedCells: []
     parentIndex: -1
@@ -209,4 +209,4 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 31, y: 31}
+  canvasSize: {x: 31, y: 39}

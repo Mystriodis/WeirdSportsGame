@@ -7,24 +7,25 @@ public class pillManager : MonoBehaviour
     //acts as the game manager for each player
     //does so by managing and storing the "state" variable 
     //possible states: selection, move, syringe
-    
+
     //these scripts mainly just pass through input to other scripts
     [SerializeField] private pillSelection selectionScript;
     [SerializeField] private pillMove moveScript;
-    [SerializeField] private Transform defaultPillSpawn;
+    [SerializeField] private Transform gridCenter;
+    [SerializeField] private Vector2 gridSize; //HALF SIZE OF GRID
 
-    public string state = "";
+    public string state;
 
     // Start is called before the first frame update
     void Start()
     {
+        passVariables();
         switchState("selection");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void passVariables()
     {
-        
+        moveScript.gridSize = gridSize;
     }
 
     public void switchState(string newState)
@@ -36,7 +37,10 @@ public class pillManager : MonoBehaviour
 
     public void switchToMove(GameObject pillPrefab)
     {
-        moveScript.currentPill = Instantiate(pillPrefab, defaultPillSpawn.position, Quaternion.identity);
+        moveScript.currentPill = Instantiate(pillPrefab, gridCenter.position, Quaternion.identity);
+        moveScript.newPill();
         switchState("move");
     }
+
+
 }
