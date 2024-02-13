@@ -43,5 +43,8 @@ public class pillManager : MonoBehaviour
         switchState("move");
     }
 
-
+    public void switchToSelection()
+    {
+        switchState("selection");
+    }
 }

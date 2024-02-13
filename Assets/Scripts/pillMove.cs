@@ -23,6 +23,8 @@ public class pillMove : MonoBehaviour
     void Update()
     {
         if (state != "move") return;
+        if (currentPill == null) return;
+
         movePill();
         
         if (Input.GetKeyDown(KeyCode.Return))
@@ -126,8 +128,25 @@ public class pillMove : MonoBehaviour
 
     private void place()
     {
-        
-        print("place down");
+        //places tiles
+        //also calls functions to check rows, columns, and item combinations
+        //switches to state depending on checks
+
+        //reset position and activate colliders
+        currentPill.transform.localScale = Vector3.one;
+
+        for (int i =0; i <currentPill.transform.childCount; i++)
+        {
+            currentPill.transform.GetChild(i).GetComponent<Collider2D>().enabled = true;
+        }
+
+
+
+        currentPill = null;
+
+        //CHANGE LATER
+        GetComponent<pillManager>().switchToSelection();
+
     }
 
     private bool canPlace()
