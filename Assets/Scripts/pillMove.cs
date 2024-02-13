@@ -143,7 +143,7 @@ public class pillMove : MonoBehaviour
         }
 
 
-
+        GetComponent<gridCheck>().pillCheck(currentPill);
         currentPill = null;
 
         //CHANGE LATER
