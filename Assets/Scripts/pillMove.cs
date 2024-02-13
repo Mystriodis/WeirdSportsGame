@@ -24,6 +24,12 @@ public class pillMove : MonoBehaviour
     {
         if (state != "move") return;
         movePill();
+        
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (!canPlace()) return;
+            place();
+        }
     }
 
     private void movePill()
@@ -116,5 +122,31 @@ public class pillMove : MonoBehaviour
     public void newPill()
     {
         relativePosition = Vector2.zero;
+    }
+
+    private void place()
+    {
+        
+        print("place down");
+    }
+
+    private bool canPlace()
+    {
+        //raycasts from each individual segment to check if there are any overlaps
+        for (int i = 0; i < currentPill.transform.childCount; i++)
+        {
+            Transform currentSegment = currentPill.transform.GetChild(i);
+
+            RaycastHit2D hit = Physics2D.Raycast(currentSegment.position, Vector2.zero);
+
+            if (hit)
+            {
+                if (hit.collider.tag == "Pill") return false;
+                if (hit.collider.tag == "Boundary") return false;
+            }
+        }
+
+
+        return true;
     }
 }
