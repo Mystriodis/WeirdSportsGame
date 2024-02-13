@@ -12,6 +12,7 @@ public class pillMove : MonoBehaviour
     public string state;
     private Vector2 relativePosition;
     public Vector2 gridSize;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class pillMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             if (!canPlace()) return;
+
             place();
         }
     }
@@ -145,7 +147,8 @@ public class pillMove : MonoBehaviour
         currentPill = null;
 
         //CHANGE LATER
-        GetComponent<pillManager>().switchToSelection();
+        StartCoroutine(nameof(switchToSelection));
+        
 
     }
 
@@ -167,5 +170,12 @@ public class pillMove : MonoBehaviour
 
 
         return true;
+    }
+
+    IEnumerator switchToSelection()
+    {
+        //start on next frame so input for the pill placement and pill selection doesn't overlap
+        yield return null;
+        GetComponent<pillManager>().switchToSelection();
     }
 }

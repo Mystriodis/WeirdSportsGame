@@ -22,16 +22,24 @@ public class pillMenu : MonoBehaviour
 
     public void scrollUp()
     {
-        if (currentIndex - 1 < 0) return;
         currentIndex--;
+        if (currentIndex < 0)
+        {
+            currentIndex = pills.Length - 1;
+        }
+        
 
         updateDisplay();
     }
 
     public void scrollDown()
     {
-        if (currentIndex + 1 == pills.Length) return;
         currentIndex++;
+
+        if (currentIndex == pills.Length)
+        {
+            currentIndex = 0;
+        }
 
         updateDisplay();
     }
