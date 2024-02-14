@@ -12,6 +12,7 @@ public class pillManager : MonoBehaviour
     [SerializeField] private pillSelection selectionScript;   //just changed to reference new script
     [SerializeField] private pillMove moveScript;
     [SerializeField] private Transform gridCenter;
+    [SerializeField] private gridCheck checkScript;
     [SerializeField] private Vector2 gridSize; //HALF SIZE OF GRID
 
     public string state;
@@ -26,6 +27,7 @@ public class pillManager : MonoBehaviour
     private void passVariables()
     {
         moveScript.gridSize = gridSize;
+        checkScript.gridSize = gridSize;
     }
 
     public void switchState(string newState)
@@ -42,5 +44,8 @@ public class pillManager : MonoBehaviour
         switchState("move");
     }
 
-
+    public void switchToSelection()
+    {
+        switchState("selection");
+    }
 }
