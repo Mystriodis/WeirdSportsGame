@@ -520,6 +520,7 @@ MonoBehaviour:
   selectionScript: {fileID: 301500394}
   moveScript: {fileID: 301500392}
   gridCenter: {fileID: 163122540}
+  checkScript: {fileID: 301500396}
   gridSize: {x: 4, y: 6}
   state: 
 --- !u!114 &301500396
@@ -534,6 +535,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9561b8976037f7544af71dec10e887ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridCorner: {fileID: 803932521}
+  gridSize: {x: 0, y: 0}
 --- !u!1 &621164478
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,6 +1330,10 @@ PrefabInstance:
     - target: {fileID: 3193508183702337362, guid: 078ffb9bdeebe7849b4d245846043ac9, type: 3}
       propertyPath: m_Name
       value: PillPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193508183702337362, guid: 078ffb9bdeebe7849b4d245846043ac9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8489435014415369313, guid: 078ffb9bdeebe7849b4d245846043ac9, type: 3}
       propertyPath: m_LocalPosition.x
