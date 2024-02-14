@@ -50,6 +50,7 @@ public class Syringe : MonoBehaviour
             {
                 //"end" game when rounds end
                 Inject();
+                //targetPos = posA.position;
             }
 
             //move towards target (non speed ramp + speed ramp ver)
@@ -74,7 +75,7 @@ public class Syringe : MonoBehaviour
         syringeAnim.SetTrigger("inject");
 
         //point system (or whatever we decide to do) calculation based on how close the syringe is to the vein
-        if (Vector2.Distance(transform.position, vein.position) < 0.1f)
+        if (Vector2.Distance(transform.position, vein.position) < 0.2f)
         {
             Debug.Log("bullseye +50");
         }
@@ -82,11 +83,11 @@ public class Syringe : MonoBehaviour
         {
             Debug.Log("+10");
         }
-        else if (Vector2.Distance(transform.position, vein.position) < 1.5f)
+        else if (Vector2.Distance(transform.position, vein.position) < 1f)
         {
             Debug.Log("+5");
         }
-        else if (Vector2.Distance(transform.position, vein.position) < 2.5f)
+        else if (Vector2.Distance(transform.position, vein.position) < 1.5f)
         {
             Debug.Log("+1");
         }
