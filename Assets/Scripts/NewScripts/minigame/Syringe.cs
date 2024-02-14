@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class Syringe : MonoBehaviour
 {
     [SerializeField] Transform posA, posB, vein;    //the two positions and the vein
-    [SerializeField] int speed = 5;                 //how fast the syringe moves
+    //[SerializeField] int speed = 5;               //how fast the syringe moves
+    public AnimationCurve speed;                    //ramp up speed when closer to vein
     [SerializeField] Vector2 targetPos;             //where the syringe is headed
 
     [SerializeField] bool moving;                   //if the syringe is still moving
@@ -49,8 +52,9 @@ public class Syringe : MonoBehaviour
                 Inject();
             }
 
-            //move towards target
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+            //move towards target (non speed ramp + speed ramp ver)
+            //transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed.Evaluate(transform.position.y) * Time.deltaTime);
         }
 
         //"end" game on return
