@@ -171,6 +171,7 @@ MonoBehaviour:
   - {fileID: 1192922371}
   - {fileID: 599380226}
   - {fileID: 972881410}
+  currentIndex: 0
 --- !u!1 &163122539
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentPill: {fileID: 0}
   state: 
+  gridSize: {x: 0, y: 0}
 --- !u!114 &301500393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,7 +261,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 301500390}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3b9f8a01daa222428386544e3660311, type: 3}
+  m_Script: {fileID: 11500000, guid: 4050047bb329dba49b570260f31aaecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selectionScript: {fileID: 301500394}
