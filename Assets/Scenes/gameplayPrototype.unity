@@ -1329,11 +1329,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3193508183702337362, guid: 078ffb9bdeebe7849b4d245846043ac9, type: 3}
       propertyPath: m_Name
-      value: PillPrefab
+      value: Phone
       objectReference: {fileID: 0}
     - target: {fileID: 3193508183702337362, guid: 078ffb9bdeebe7849b4d245846043ac9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8489435014415369313, guid: 078ffb9bdeebe7849b4d245846043ac9, type: 3}
       propertyPath: m_LocalPosition.x

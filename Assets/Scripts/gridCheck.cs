@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class gridCheck : MonoBehaviour
@@ -45,6 +46,7 @@ public class gridCheck : MonoBehaviour
 
         }
 
+        phoneCheck(deleteList);
         clearPills(deleteList);
 
         return "";
@@ -68,5 +70,37 @@ public class gridCheck : MonoBehaviour
 
             Destroy(deleteList[i]);
         }
+    }
+
+    private List<GameObject> phoneCheck(List<GameObject> deleteList)
+    {
+        //adds any phone component in deletelist's parent to phonelist
+
+        List<GameObject> phoneList = new List<GameObject>();
+        for (int i = 0; i < deleteList.Count; i++)
+        {
+            if (deleteList[i].tag == "Phone" && !phoneList.Contains(deleteList[i].transform.parent.gameObject))
+            {
+                phoneList.Add(deleteList[i].transform.parent.gameObject);
+            }
+        }
+
+        //add other phone components to list
+        if (phoneList.Count > 0)
+        {
+            for (int i = 0; i < phoneList.Count;i++)
+            {
+                for (int j = 0; j < phoneList[i].transform.childCount; j++)
+                {
+                    deleteList.Add(phoneList[i].transform.GetChild(j).gameObject);
+                }
+                
+            }
+        }
+
+        //trigger phone effect
+        //TO ADD
+
+        return deleteList;
     }
 }
