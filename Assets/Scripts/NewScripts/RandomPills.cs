@@ -14,8 +14,9 @@ public class RandomPills : MonoBehaviour
     [SerializeField] int optionsAmount = 25;            //how many pills are in the list total
 
     [SerializeField] pillMenu whichPill;                //grab the current index and the pill capsules
-    [SerializeField] List<SpriteRenderer> pillDisplays; //the icon of all 3 pills
+    [SerializeField] List<pillDisplay> pillDisplays; //the icon of all 3 pills
 
+    //[SerializeField] ScriptableObject pill;
 
     // Start is called before the first frame update
     void Start()
@@ -34,10 +35,10 @@ public class RandomPills : MonoBehaviour
         }
 
         //nab the pill capsules from the menu script and steal the sprite renderer
-        pillDisplays = new List<SpriteRenderer>(3);
+        pillDisplays = new List<pillDisplay>(3);
         for (int i = 0; i < 3; i++)
         {
-            pillDisplays.Add(whichPill.pills[i].GetComponent<SpriteRenderer>());
+            pillDisplays.Add(whichPill.pills[i].GetComponent<pillDisplay>());
             //set the starting 3 pills
             newPill(i);
         }
@@ -57,7 +58,8 @@ public class RandomPills : MonoBehaviour
 
         //get a new pill and change the sprite image
         currentPill = availablePills[Random.Range(0, availablePills.Count)];
-        pillDisplays[selectedPill].sprite = currentPill.image;
+        pillDisplays[selectedPill].currentPill = currentPill;
+        pillDisplays[selectedPill].changeSprite();
 
         //remove pill from the list to prevent it from being pulled again
         availablePills.Remove(currentPill);

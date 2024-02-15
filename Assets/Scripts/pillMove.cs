@@ -140,6 +140,7 @@ public class pillMove : MonoBehaviour
         for (int i =0; i <currentPill.transform.childCount; i++)
         {
             currentPill.transform.GetChild(i).GetComponent<Collider2D>().enabled = true;
+            currentPill.transform.GetChild(i).GetComponent<SpriteRenderer>().sortingOrder = 0;
         }
 
 
@@ -165,6 +166,7 @@ public class pillMove : MonoBehaviour
             {
                 if (hit.collider.tag == "Pill") return false;
                 if (hit.collider.tag == "Boundary") return false;
+                if (hit.collider.tag == "Phone") return false;
             }
         }
 

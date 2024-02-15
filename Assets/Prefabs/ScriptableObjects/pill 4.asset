@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a286a5ea95f9be3468f96654e927130b, type: 3}
   m_Name: pill 4
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8860979043286898379, guid: b463217da6a6b0c44816e7335511b3d2, type: 3}
-  image: {fileID: 21300000, guid: ffe0e3f7847d27a47a1f65bebf92e5b3, type: 3}
+  prefab: {fileID: 2710400514923682318, guid: 41bf93577c53bcc4eb81eb6dbcfdcb1c, type: 3}
+  image: {fileID: 21300000, guid: 3919ad0d9c90ea14190d5d652dfe1984, type: 3}
   slots: 4
   size: {x: 2, y: 2}
   strength: 0

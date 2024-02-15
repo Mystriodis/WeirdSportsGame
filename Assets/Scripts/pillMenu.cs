@@ -61,6 +61,6 @@ public class pillMenu : MonoBehaviour
 
     public GameObject confirm()
     {
-        return pills[currentIndex]; //PLACEHOLDER RETURN, should return chosen prefab object
+        return pills[currentIndex].GetComponent<pillDisplay>().currentPill.prefab;
     }
 }

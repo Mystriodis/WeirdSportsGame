@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b146d2da478301c4c9b74779da909c67
+guid: 3919ad0d9c90ea14190d5d652dfe1984
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cluster 3 slots_0
+      name: pill 4 slots_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f96a9d7147017f548b76d6d78670554f
-      internalID: -688155825
+      spriteID: 385a791a3cc60944699a7653146fbb27
+      internalID: -662692517
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cluster 3 slots_1
+      name: pill 4 slots_1
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 250
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63eba860c8b0ef4488a23844c8705d62
+      internalID: 366353302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pill 4 slots_2
       rect:
         serializedVersion: 2
         x: 0
@@ -158,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 285345c59cb64854fa8edf296696b9e4
-      internalID: -682770594
+      spriteID: 4fea7428f165a9049aff56349d503b7e
+      internalID: -1581712185
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cluster 3 slots_2
+      name: pill 4 slots_3
       rect:
         serializedVersion: 2
         x: 250
@@ -179,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59a9f1d0e7981fc4e851901be3f925b2
-      internalID: 468491895
+      spriteID: fb2b0a541bcb9a747a656d25ee5e4371
+      internalID: 599299703
       vertices: []
       indices: 
       edges: []
@@ -196,9 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      cluster 3 slots_0: -688155825
-      cluster 3 slots_1: -682770594
-      cluster 3 slots_2: 468491895
+      pill 4 slots_0: -662692517
+      pill 4 slots_1: 366353302
+      pill 4 slots_2: -1581712185
+      pill 4 slots_3: 599299703
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

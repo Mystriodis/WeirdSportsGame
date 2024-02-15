@@ -10,6 +10,8 @@ public class pillSelection : MonoBehaviour
     public string state;
     [SerializeField] UnityEvent scrollUp, scrollDown;
     [SerializeField] pillMenu pillMenu;
+    [SerializeField] RandomPills pillList;
+    [SerializeField] pillMenu whichPill;
 
 
     // Start is called before the first frame update
@@ -43,8 +45,18 @@ public class pillSelection : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
+
             //get prefab
-            GameObject pillObject = pillMenu.confirm();
+            GameObject pillObject = pillMenu.confirm(); //CHANGE
+
+            //change sorting layer
+            for (int i = 0; i < pillObject.transform.childCount; i++)
+            {
+                pillObject.transform.GetChild(i).GetComponent<SpriteRenderer>().sortingOrder = 1;
+            }
+
+            //switches pill when selected - sends info on which pill is selected
+            pillList.newPill(whichPill.currentIndex);
 
             //switch state to "move"
             GetComponent<pillManager>().switchToMove(pillObject);
