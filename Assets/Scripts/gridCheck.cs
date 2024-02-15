@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class gridCheck : MonoBehaviour
 {
     [SerializeField] Transform gridCorner; //top left of grid
     public Vector2 gridSize; //half size of grid
+    private List<GameObject> deleteList = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +24,6 @@ public class gridCheck : MonoBehaviour
 
     public string pillCheck(GameObject currentPill)
     {
-        List<GameObject> deleteList = new List<GameObject>();
-
         for (int i = 0; i < currentPill.transform.childCount; i++)
         {
             Vector2 segmentPosition = currentPill.transform.GetChild(i).position;
@@ -36,23 +36,23 @@ public class gridCheck : MonoBehaviour
 
             if (rowHits.Length >= gridSize.x * 2 + 1)
             {
-                deleteList = addToList(deleteList, rowHits);
+                deleteList = addToList(rowHits);
             }
 
             if (columnHits.Length >= gridSize.y * 2 + 1)
             {
-                deleteList = addToList(deleteList, columnHits);
+                deleteList = addToList(columnHits);
             }
 
         }
 
-        phoneCheck(deleteList);
-        clearPills(deleteList);
+        phoneCheck();
+        clearPills();
 
         return "";
     }
 
-    private List<GameObject> addToList(List<GameObject> deleteList, RaycastHit2D[] hitArray)
+    private List<GameObject> addToList(RaycastHit2D[] hitArray)
     {
         for (int i = 0; i < hitArray.Length; i++)
         {
@@ -62,7 +62,7 @@ public class gridCheck : MonoBehaviour
         return deleteList;
     }
 
-    private void clearPills(List<GameObject> deleteList)
+    private void clearPills()
     {
         for (int i = 0; i < deleteList.Count; i++)
         {
@@ -70,37 +70,55 @@ public class gridCheck : MonoBehaviour
 
             Destroy(deleteList[i]);
         }
+
+
+        deleteList.Clear();
     }
 
-    private List<GameObject> phoneCheck(List<GameObject> deleteList)
+    private bool phoneCheck()
     {
+        bool hasConnectedPhone = false;
         //adds any phone component in deletelist's parent to phonelist
+        //returns true if there is at least 1 correctly connected pair of phone segments
+        
 
         List<GameObject> phoneList = new List<GameObject>();
         for (int i = 0; i < deleteList.Count; i++)
         {
+            //puts parent object in list
             if (deleteList[i].tag == "Phone" && !phoneList.Contains(deleteList[i].transform.parent.gameObject))
             {
                 phoneList.Add(deleteList[i].transform.parent.gameObject);
             }
         }
 
-        //add other phone components to list
+        //add child phone components to list
         if (phoneList.Count > 0)
         {
             for (int i = 0; i < phoneList.Count;i++)
             {
                 for (int j = 0; j < phoneList[i].transform.childCount; j++)
                 {
-                    deleteList.Add(phoneList[i].transform.GetChild(j).gameObject);
+                    GameObject currentPhoneSection = phoneList[i].transform.GetChild(j).gameObject;
+                    deleteList.Add(currentPhoneSection);
+
+                    //add other phone section if phone is connected
+                    if (currentPhoneSection.GetComponent<connectionCheck>() == null) continue;
+                    connectionCheck connectedSegment = currentPhoneSection.GetComponent<connectionCheck>();
+                    if (connectedSegment.connected == false) continue;
+                    if (phoneList.Contains(connectedSegment.connectedObject)) continue;
+
+
+                    phoneList.Add(currentPhoneSection.GetComponent<connectionCheck>().connectedObject);
+                    hasConnectedPhone = true;
                 }
                 
             }
         }
 
-        //trigger phone effect
         //TO ADD
+        //trigger phone effect
 
-        return deleteList;
+        return hasConnectedPhone;
     }
 }

@@ -47,12 +47,17 @@ public class pillSelection : MonoBehaviour
         {
 
             //get prefab
-            GameObject pillObject = pillMenu.confirm(); //CHANGE
+            GameObject pillObject = pillMenu.confirm(); 
 
+            
             //change sorting layer
             for (int i = 0; i < pillObject.transform.childCount; i++)
             {
-                pillObject.transform.GetChild(i).GetComponent<SpriteRenderer>().sortingOrder = 1;
+                if (pillObject.transform.GetChild(i).GetComponent<SpriteRenderer>() != null)
+                {
+                    pillObject.transform.GetChild(i).GetComponent<SpriteRenderer>().sortingOrder = 1;
+                }
+                
             }
 
             //switches pill when selected - sends info on which pill is selected

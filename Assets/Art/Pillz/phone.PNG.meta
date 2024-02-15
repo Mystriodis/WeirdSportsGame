@@ -127,9 +127,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 500
-        width: 500
-        height: 500
+        y: 750
+        width: 250
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,10 +147,10 @@ TextureImporter:
       name: phone_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 500
-        height: 500
+        x: 250
+        y: 750
+        width: 250
+        height: 250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,6 +160,132 @@ TextureImporter:
       bones: []
       spriteID: 37e34723029631d4e854be2d578fd9a1
       internalID: -1482469452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phone_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 500
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 834514c3be005d842adf1075ff3fbe8d
+      internalID: 184399694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phone_3
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 500
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c648428e76c1e534eaab1a7537d40349
+      internalID: 1375393870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phone_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 250
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9a3c43391daec4409273f437730b21b
+      internalID: -899632348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phone_5
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 250
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29da437ae7e87d747832da9a2bef6e24
+      internalID: -457642859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phone_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c999858f7ce18c448ccca836b923b29
+      internalID: -1905395587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: phone_7
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 0
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4b2ce979961b97469bd7270830977ee
+      internalID: -254991274
       vertices: []
       indices: 
       edges: []
@@ -177,6 +303,12 @@ TextureImporter:
     nameFileIdTable:
       phone_0: 1849130646
       phone_1: -1482469452
+      phone_2: 184399694
+      phone_3: 1375393870
+      phone_4: -899632348
+      phone_5: -457642859
+      phone_6: -1905395587
+      phone_7: -254991274
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

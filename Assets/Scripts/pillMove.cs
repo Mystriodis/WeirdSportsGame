@@ -139,8 +139,20 @@ public class pillMove : MonoBehaviour
 
         for (int i =0; i <currentPill.transform.childCount; i++)
         {
-            currentPill.transform.GetChild(i).GetComponent<Collider2D>().enabled = true;
-            currentPill.transform.GetChild(i).GetComponent<SpriteRenderer>().sortingOrder = 0;
+            if (currentPill.transform.GetChild(i).GetComponent<connectionCheck>() != null)
+            {
+                currentPill.transform.GetChild(i).GetComponent<connectionCheck>().check();
+            }
+
+            if (currentPill.transform.GetChild(i).GetComponent<Collider2D>() != null)
+            {
+                currentPill.transform.GetChild(i).GetComponent<Collider2D>().enabled = true;
+            }
+
+            if (currentPill.transform.GetChild(i).GetComponent<SpriteRenderer>() != null)
+            {
+                currentPill.transform.GetChild(i).GetComponent<SpriteRenderer>().sortingOrder = 0;
+            }
         }
 
 
