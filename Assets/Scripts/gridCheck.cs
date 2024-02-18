@@ -131,7 +131,7 @@ public class gridCheck : MonoBehaviour
         for (int i = 0; i < gridSize.x*2+1; i++)
         {
             Vector2 columnCastPos = new Vector2(gridCorner.position.x + i, gridCorner.position.y);
-            RaycastHit2D[] cast = Physics2D.RaycastAll(columnCastPos, Vector2.down, gridSize.y * 2 + 1);
+            RaycastHit2D[] cast = Physics2D.RaycastAll(columnCastPos, Vector2.down, gridSize.y * 2);
             pillAmount += cast.Length;
         }
 
