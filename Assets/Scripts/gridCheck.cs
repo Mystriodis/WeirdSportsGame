@@ -102,7 +102,7 @@ public class gridCheck : MonoBehaviour
                     GameObject currentPhoneSection = phoneList[i].transform.GetChild(j).gameObject;
                     deleteList.Add(currentPhoneSection);
 
-                    //add other phone section if phone is connected
+                    //add other phone section if phone is connected and hasn't been added to list yet
                     if (currentPhoneSection.GetComponent<connectionCheck>() == null) continue;
                     connectionCheck connectedSegment = currentPhoneSection.GetComponent<connectionCheck>();
                     if (connectedSegment.connected == false) continue;
