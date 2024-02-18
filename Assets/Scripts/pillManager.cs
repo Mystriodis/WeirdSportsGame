@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class pillManager : MonoBehaviour
 {
@@ -9,19 +10,25 @@ public class pillManager : MonoBehaviour
     //possible states: selection, move, syringe
 
     //these scripts mainly just pass through input to other scripts
-    [SerializeField] private pillSelection selectionScript;   //just changed to reference new script
-    [SerializeField] private pillMove moveScript;
-    [SerializeField] private Transform gridCenter;
-    [SerializeField] private gridCheck checkScript;
-    [SerializeField] private Vector2 gridSize; //HALF SIZE OF GRID
+    [SerializeField] pillSelection selectionScript;   //just changed to reference new script
+    [SerializeField] pillMove moveScript;
+    [SerializeField] Transform gridCenter;
+    [SerializeField] gridCheck checkScript;
+    [SerializeField] Vector2 gridSize; //HALF SIZE OF GRID
+    [SerializeField] Image caughtCounter;
+    [SerializeField] float maxCaughtPercentage; //in decimal (0.65)
+
 
     public string state;
+    public int pillAmount;
+    private float currentCaughtPercentage;
 
     // Start is called before the first frame update
     void Start()
     {
         passVariables();
         switchState("selection");
+        updateCaught();
     }
 
     private void passVariables()
@@ -47,5 +54,20 @@ public class pillManager : MonoBehaviour
     public void switchToSelection()
     {
         switchState("selection");
+    }
+
+    private void updateUI()
+    {
+        //caught counter
+        caughtCounter.fillAmount = currentCaughtPercentage;
+    }
+
+    public void updateCaught()
+    {
+        int maxSafeAmount = Mathf.CeilToInt((gridSize.x * 2 + 1) * (gridSize.y * 2 + 1)*maxCaughtPercentage);
+        print(maxSafeAmount);
+        currentCaughtPercentage = pillAmount / (float)maxSafeAmount;
+
+        updateUI();
     }
 }
