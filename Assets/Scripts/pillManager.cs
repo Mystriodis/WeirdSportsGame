@@ -65,7 +65,6 @@ public class pillManager : MonoBehaviour
     public void updateCaught()
     {
         int maxSafeAmount = Mathf.CeilToInt((gridSize.x * 2 + 1) * (gridSize.y * 2 + 1)*maxCaughtPercentage);
-        print(maxSafeAmount);
         currentCaughtPercentage = pillAmount / (float)maxSafeAmount;
 
         updateUI();

@@ -10,6 +10,7 @@ public class gridCheck : MonoBehaviour
     private List<GameObject> deleteList = new List<GameObject>();
     private pillManager manager;
     [SerializeField] UnityEvent updateCaught;
+    [SerializeField] UnityEvent lineShake;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class gridCheck : MonoBehaviour
 
     public string pillCheck(GameObject currentPill)
     {
+        int lineClearAmount = 0;
         for (int i = 0; i < currentPill.transform.childCount; i++)
         {
             Vector2 segmentPosition = currentPill.transform.GetChild(i).position;
@@ -38,11 +40,13 @@ public class gridCheck : MonoBehaviour
             if (rowHits.Length >= gridSize.x * 2 + 1)
             {
                 deleteList = addToList(rowHits);
+                lineClearAmount++;
             }
 
             if (columnHits.Length >= gridSize.y * 2 + 1)
             {
                 deleteList = addToList(columnHits);
+                lineClearAmount++;
             }
 
         }
@@ -51,6 +55,14 @@ public class gridCheck : MonoBehaviour
         clearPills();
 
         pillCount();
+
+        if (lineClearAmount > 0)
+        {
+            for (int i = 0; i < lineClearAmount; i++)
+            {
+                lineShake.Invoke();
+            }
+        }
         return "";
     }
 
