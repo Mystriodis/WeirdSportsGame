@@ -580,6 +580,9 @@ MonoBehaviour:
   currentPill: {fileID: 0}
   state: 
   gridSize: {x: 0, y: 0}
+  shake:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &301500394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,7 +646,10 @@ MonoBehaviour:
   gridCenter: {fileID: 163122540}
   checkScript: {fileID: 301500396}
   gridSize: {x: 4, y: 6}
+  caughtCounter: {fileID: 0}
+  maxCaughtPercentage: 0
   state: 
+  pillAmount: 0
 --- !u!114 &301500396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,6 +664,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridCorner: {fileID: 803932521}
   gridSize: {x: 0, y: 0}
+  updateCaught:
+    m_PersistentCalls:
+      m_Calls: []
+  lineShake:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &621164478
 GameObject:
   m_ObjectHideFlags: 0
@@ -1662,7 +1674,7 @@ Transform:
   m_GameObject: {fileID: 2070136431}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.2, z: -10}
+  m_LocalPosition: {x: -1.49, y: 1.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

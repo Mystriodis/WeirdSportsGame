@@ -14,11 +14,12 @@ public class pillMove : MonoBehaviour
     private Vector2 relativePosition;
     public Vector2 gridSize;
     [SerializeField] UnityEvent shake;
+    private pillManager manager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        manager = GetComponent<pillManager>();
     }
 
     // Update is called once per frame
@@ -142,6 +143,7 @@ public class pillMove : MonoBehaviour
         {
             if (currentPill.transform.GetChild(i).GetComponent<connectionCheck>() != null)
             {
+                currentPill.transform.GetChild(i).GetComponent<connectionCheck>().manager = manager;
                 currentPill.transform.GetChild(i).GetComponent<connectionCheck>().check();
             }
 
@@ -161,10 +163,11 @@ public class pillMove : MonoBehaviour
         currentPill = null;
         shake.Invoke();
 
-        //CHANGE LATER
-        StartCoroutine(nameof(switchToSelection));
-        
-
+        //switch back to start of gameplay loop
+        if (state == "move")
+        {
+            StartCoroutine(nameof(switchToSelection));
+        }
     }
 
     private bool canPlace()
@@ -192,6 +195,6 @@ public class pillMove : MonoBehaviour
     {
         //start on next frame so input for the pill placement and pill selection doesn't overlap
         yield return null;
-        GetComponent<pillManager>().switchToSelection();
+        manager.switchToSelection();
     }
 }

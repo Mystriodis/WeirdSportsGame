@@ -17,6 +17,7 @@ public class pillManager : MonoBehaviour
     [SerializeField] Vector2 gridSize; //HALF SIZE OF GRID
     [SerializeField] Image caughtCounter;
     [SerializeField] float maxCaughtPercentage; //in decimal (0.65)
+    [SerializeField] GameObject syringeMinigame;
 
 
     public string state;
@@ -54,6 +55,13 @@ public class pillManager : MonoBehaviour
     public void switchToSelection()
     {
         switchState("selection");
+    }
+
+    public void switchToSyringe()
+    {
+
+        switchState("syringe");
+        Instantiate(syringeMinigame);
     }
 
     private void updateUI()

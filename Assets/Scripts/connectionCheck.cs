@@ -9,7 +9,7 @@ public class connectionCheck : MonoBehaviour
     public string currentObject = "";
     public bool connected = false;
     public GameObject connectedObject, connectedObject1;
-
+    public pillManager manager; //set from pillMove.cs
 
     // Start is called before the first frame update
     void Start()
@@ -108,7 +108,7 @@ public class connectionCheck : MonoBehaviour
 
         if (neighborSegment0.currentObject == target0 && neighborSegment1.currentObject == target1)
         {
-            print("WORKS");
+            manager.switchToSyringe();
         }
 
     }
