@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class pillMove : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class pillMove : MonoBehaviour
     public string state;
     private Vector2 relativePosition;
     public Vector2 gridSize;
-    
+    [SerializeField] UnityEvent shake;
 
     // Start is called before the first frame update
     void Start()
@@ -158,6 +159,7 @@ public class pillMove : MonoBehaviour
 
         GetComponent<gridCheck>().pillCheck(currentPill);
         currentPill = null;
+        shake.Invoke();
 
         //CHANGE LATER
         StartCoroutine(nameof(switchToSelection));

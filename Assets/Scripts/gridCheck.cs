@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class gridCheck : MonoBehaviour
 {
     [SerializeField] Transform gridCorner; //top left of grid
     public Vector2 gridSize; //half size of grid
     private List<GameObject> deleteList = new List<GameObject>();
+    private pillManager manager;
+    [SerializeField] UnityEvent updateCaught;
+    [SerializeField] UnityEvent lineShake;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        manager = GetComponent<pillManager>();
     }
 
     // Update is called once per frame
@@ -24,6 +26,7 @@ public class gridCheck : MonoBehaviour
 
     public string pillCheck(GameObject currentPill)
     {
+        int lineClearAmount = 0;
         for (int i = 0; i < currentPill.transform.childCount; i++)
         {
             Vector2 segmentPosition = currentPill.transform.GetChild(i).position;
@@ -37,11 +40,13 @@ public class gridCheck : MonoBehaviour
             if (rowHits.Length >= gridSize.x * 2 + 1)
             {
                 deleteList = addToList(rowHits);
+                lineClearAmount++;
             }
 
             if (columnHits.Length >= gridSize.y * 2 + 1)
             {
                 deleteList = addToList(columnHits);
+                lineClearAmount++;
             }
 
         }
@@ -49,6 +54,15 @@ public class gridCheck : MonoBehaviour
         phoneCheck();
         clearPills();
 
+        pillCount();
+
+        if (lineClearAmount > 0)
+        {
+            for (int i = 0; i < lineClearAmount; i++)
+            {
+                lineShake.Invoke();
+            }
+        }
         return "";
     }
 
@@ -102,7 +116,7 @@ public class gridCheck : MonoBehaviour
                     GameObject currentPhoneSection = phoneList[i].transform.GetChild(j).gameObject;
                     deleteList.Add(currentPhoneSection);
 
-                    //add other phone section if phone is connected
+                    //add other phone section if phone is connected and hasn't been added to list yet
                     if (currentPhoneSection.GetComponent<connectionCheck>() == null) continue;
                     connectionCheck connectedSegment = currentPhoneSection.GetComponent<connectionCheck>();
                     if (connectedSegment.connected == false) continue;
@@ -120,5 +134,20 @@ public class gridCheck : MonoBehaviour
         //trigger phone effect
 
         return hasConnectedPhone;
+    }
+
+    private void pillCount()
+    {
+        //checks the amount of pills on the grid for the caught meter
+        int pillAmount = 0;
+        for (int i = 0; i < gridSize.x*2+1; i++)
+        {
+            Vector2 columnCastPos = new Vector2(gridCorner.position.x + i, gridCorner.position.y);
+            RaycastHit2D[] cast = Physics2D.RaycastAll(columnCastPos, Vector2.down, gridSize.y * 2);
+            pillAmount += cast.Length;
+        }
+
+        manager.pillAmount = pillAmount;
+        updateCaught.Invoke();
     }
 }
