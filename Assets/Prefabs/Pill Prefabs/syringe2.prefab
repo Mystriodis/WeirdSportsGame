@@ -388,3 +388,4 @@ MonoBehaviour:
   connected: 0
   connectedObject: {fileID: 0}
   connectedObject1: {fileID: 0}
+  manager: {fileID: 0}

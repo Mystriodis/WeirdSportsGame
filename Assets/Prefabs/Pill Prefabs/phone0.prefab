@@ -91,6 +91,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentObject: phone0
+  connected: 0
+  connectedObject: {fileID: 0}
+  connectedObject1: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!1 &621776465688530663
 GameObject:
   m_ObjectHideFlags: 0

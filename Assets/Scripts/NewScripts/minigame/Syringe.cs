@@ -1,6 +1,6 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.GraphicsBuffer;
+
 
 public class Syringe : MonoBehaviour
 {
@@ -14,6 +14,8 @@ public class Syringe : MonoBehaviour
     [SerializeField] int rounds = 1;                //how many loops it can go
 
     private Animator syringeAnim;                   //animator - 2 states, scrolling and end
+
+    [SerializeField] minigameManager miniManager;
 
     private void Start()
     {
@@ -73,27 +75,39 @@ public class Syringe : MonoBehaviour
         transform.position = transform.position;
         //change animation
         syringeAnim.SetTrigger("inject");
+        StartCoroutine(nameof(finishMinigame));
 
-        //point system (or whatever we decide to do) calculation based on how close the syringe is to the vein
-        if (Vector2.Distance(transform.position, vein.position) < 0.2f)
+    }
+
+    IEnumerator finishMinigame()
+    {
+        for (int i = 0; i < 10; i++)
         {
-            Debug.Log("bullseye +50");
+            if (Vector2.Distance(transform.position, vein.position) < 0.2f)
+            {
+                Actions.increaseScore(miniManager.playerSide, 50f / 10f);
+            }
+            else if (Vector2.Distance(transform.position, vein.position) < 0.5f)
+            {
+                Actions.increaseScore(miniManager.playerSide, 10f / 10f);
+            }
+            else if (Vector2.Distance(transform.position, vein.position) < 1f)
+            {
+                Actions.increaseScore(miniManager.playerSide, 5f / 10f);
+            }
+            else if (Vector2.Distance(transform.position, vein.position) < 1.5f)
+            {
+                Actions.increaseScore(miniManager.playerSide, 1f / 10f);
+            }
+            else
+            {
+                Actions.increaseScore(miniManager.playerSide, 0.5f / 10f);
+            }
+
+            yield return new WaitForSeconds(5f/60f);
         }
-        else if (Vector2.Distance(transform.position, vein.position) < 0.5f)
-        {
-            Debug.Log("+10");
-        }
-        else if (Vector2.Distance(transform.position, vein.position) < 1f)
-        {
-            Debug.Log("+5");
-        }
-        else if (Vector2.Distance(transform.position, vein.position) < 1.5f)
-        {
-            Debug.Log("+1");
-        }
-        else
-        {
-            Debug.Log("miss");
-        }
+
+        yield return new WaitForSeconds(1f);
+        miniManager.endMinigame();
     }
 }

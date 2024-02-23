@@ -187,7 +187,6 @@ public class pillMove : MonoBehaviour
             }
         }
 
-
         return true;
     }
 

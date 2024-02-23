@@ -94,6 +94,7 @@ MonoBehaviour:
   connected: 0
   connectedObject: {fileID: 0}
   connectedObject1: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!1 &2710400514923682318
 GameObject:
   m_ObjectHideFlags: 0

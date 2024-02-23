@@ -45,12 +45,12 @@ public class pillSelection : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-
             //get prefab
-            GameObject pillObject = pillMenu.confirm(); 
+            Pills pillScriptableObject = pillMenu.confirm();
 
-            
-            //change sorting layer
+            GameObject pillObject = pillScriptableObject.prefab;
+
+            //game object setup: switch sorting layer and passing through prefab
             for (int i = 0; i < pillObject.transform.childCount; i++)
             {
                 if (pillObject.transform.GetChild(i).GetComponent<SpriteRenderer>() != null)
@@ -59,6 +59,7 @@ public class pillSelection : MonoBehaviour
                 }
                 
             }
+            pillObject.AddComponent<pillStats>().stats = pillScriptableObject;
 
             //switches pill when selected - sends info on which pill is selected
             pillList.newPill(whichPill.currentIndex);

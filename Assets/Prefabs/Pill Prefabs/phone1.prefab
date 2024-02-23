@@ -647,3 +647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentObject: phone1
+  connected: 0
+  connectedObject: {fileID: 0}
+  connectedObject1: {fileID: 0}
+  manager: {fileID: 0}

@@ -5,12 +5,14 @@ using UnityEngine.Events;
 
 public class gridCheck : MonoBehaviour
 {
+    public int playerSide;
     [SerializeField] Transform gridCorner; //top left of grid
     public Vector2 gridSize; //half size of grid
     private List<GameObject> deleteList = new List<GameObject>();
     private pillManager manager;
     [SerializeField] UnityEvent updateCaught;
     [SerializeField] UnityEvent lineShake;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,7 @@ public class gridCheck : MonoBehaviour
     public string pillCheck(GameObject currentPill)
     {
         int lineClearAmount = 0;
+
         for (int i = 0; i < currentPill.transform.childCount; i++)
         {
             Vector2 segmentPosition = currentPill.transform.GetChild(i).position;
@@ -70,7 +73,7 @@ public class gridCheck : MonoBehaviour
     {
         for (int i = 0; i < hitArray.Length; i++)
         {
-            deleteList.Add(hitArray[i].collider.gameObject);
+            deleteList.Add(hitArray[i].collider.gameObject);    
         }
 
         return deleteList;
@@ -78,14 +81,23 @@ public class gridCheck : MonoBehaviour
 
     private void clearPills()
     {
+        //clear pills and then send cleared pill values to game manager
+        float clearedValue = 0;
+        
         for (int i = 0; i < deleteList.Count; i++)
         {
             if (deleteList[i] == null) continue;
 
+           
+            if (deleteList[i].tag == "Pill")
+            {
+                Pills pillGroupStats = deleteList[i].transform.parent.GetComponent<pillStats>().stats; //stats of the entire pill group
+                clearedValue += pillGroupStats.slots / pillGroupStats.strength;
+            }
             Destroy(deleteList[i]);
         }
 
-
+        Actions.increaseScore(playerSide, clearedValue);
         deleteList.Clear();
     }
 
@@ -146,7 +158,7 @@ public class gridCheck : MonoBehaviour
             RaycastHit2D[] cast = Physics2D.RaycastAll(columnCastPos, Vector2.down, gridSize.y * 2);
             pillAmount += cast.Length;
         }
-
+        
         manager.pillAmount = pillAmount;
         updateCaught.Invoke();
     }

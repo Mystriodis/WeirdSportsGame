@@ -51,7 +51,7 @@ public class pillMenu : MonoBehaviour
         {
             if (currentIndex == i)
             {
-                pills[i].transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
+                pills[i].transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
             } else
             {
                 pills[i].transform.localScale = Vector3.one;
@@ -59,8 +59,8 @@ public class pillMenu : MonoBehaviour
         }
     }
 
-    public GameObject confirm()
+    public Pills confirm()
     {
-        return pills[currentIndex].GetComponent<pillDisplay>().currentPill.prefab;
+        return pills[currentIndex].GetComponent<pillDisplay>().currentPill;
     }
 }

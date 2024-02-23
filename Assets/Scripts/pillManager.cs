@@ -10,6 +10,7 @@ public class pillManager : MonoBehaviour
     //possible states: selection, move, syringe
 
     //these scripts mainly just pass through input to other scripts
+    public int playerSide; //1 or 2
     [SerializeField] pillSelection selectionScript;   //just changed to reference new script
     [SerializeField] pillMove moveScript;
     [SerializeField] Transform gridCenter;
@@ -18,8 +19,11 @@ public class pillManager : MonoBehaviour
     [SerializeField] Image caughtCounter;
     [SerializeField] float maxCaughtPercentage; //in decimal (0.65)
     [SerializeField] GameObject syringeMinigame;
+    [SerializeField] GameObject gridBackground; //for setting minigame size
+    
+    
 
-
+    
     public string state;
     public int pillAmount;
     private float currentCaughtPercentage;
@@ -36,6 +40,8 @@ public class pillManager : MonoBehaviour
     {
         moveScript.gridSize = gridSize;
         checkScript.gridSize = gridSize;
+        checkScript.playerSide = playerSide;
+        
     }
 
     public void switchState(string newState)
@@ -61,7 +67,12 @@ public class pillManager : MonoBehaviour
     {
 
         switchState("syringe");
-        Instantiate(syringeMinigame);
+        GameObject minigameObject = Instantiate(syringeMinigame);
+        minigameObject.transform.position = gridBackground.transform.position;
+        minigameObject.transform.localScale = gridBackground.transform.localScale;
+        minigameManager minigameScript = minigameObject.GetComponent<minigameManager>();
+        minigameScript.manager = this;
+        minigameScript.playerSide = playerSide;
     }
 
     private void updateUI()
