@@ -176,6 +176,7 @@ public class pillMove : MonoBehaviour
         for (int i = 0; i < currentPill.transform.childCount; i++)
         {
             Transform currentSegment = currentPill.transform.GetChild(i);
+            if (currentSegment.tag == "Connection") continue;
 
             RaycastHit2D hit = Physics2D.Raycast(currentSegment.position, Vector2.zero);
 

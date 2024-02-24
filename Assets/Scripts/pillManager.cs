@@ -20,9 +20,8 @@ public class pillManager : MonoBehaviour
     [SerializeField] float maxCaughtPercentage; //in decimal (0.65)
     [SerializeField] GameObject syringeMinigame;
     [SerializeField] GameObject gridBackground; //for setting minigame size
+    [SerializeField] GameObject pillParent;
     
-    
-
     
     public string state;
     public int pillAmount;
@@ -41,6 +40,7 @@ public class pillManager : MonoBehaviour
         moveScript.gridSize = gridSize;
         checkScript.gridSize = gridSize;
         checkScript.playerSide = playerSide;
+        checkScript.pillParent = pillParent;
         
     }
 
@@ -53,7 +53,10 @@ public class pillManager : MonoBehaviour
 
     public void switchToMove(GameObject pillPrefab)
     {
-        moveScript.currentPill = Instantiate(pillPrefab, gridCenter.position, Quaternion.identity);
+        GameObject newPill = Instantiate(pillPrefab, gridCenter.position, Quaternion.identity);
+        newPill.transform.parent = pillParent.transform;
+        moveScript.currentPill = newPill;
+        
         moveScript.newPill();
         switchState("move");
     }

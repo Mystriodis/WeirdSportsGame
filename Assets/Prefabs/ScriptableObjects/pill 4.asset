@@ -16,6 +16,6 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 3919ad0d9c90ea14190d5d652dfe1984, type: 3}
   slots: 4
   size: {x: 2, y: 2}
-  strength: 0
+  strength: 5
   itemName: pill 4
   type: 0

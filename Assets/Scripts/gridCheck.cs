@@ -5,13 +5,15 @@ using UnityEngine.Events;
 
 public class gridCheck : MonoBehaviour
 {
-    public int playerSide;
+    [HideInInspector] public int playerSide;
+    [HideInInspector] public Vector2 gridSize; //half size of grid
+    [HideInInspector]  public GameObject pillParent;
     [SerializeField] Transform gridCorner; //top left of grid
-    public Vector2 gridSize; //half size of grid
     private List<GameObject> deleteList = new List<GameObject>();
     private pillManager manager;
     [SerializeField] UnityEvent updateCaught;
     [SerializeField] UnityEvent lineShake;
+    
     
 
     // Start is called before the first frame update
@@ -55,6 +57,7 @@ public class gridCheck : MonoBehaviour
         }
 
         phoneCheck();
+        syringeClear();
         clearPills();
 
         pillCount();
@@ -82,8 +85,11 @@ public class gridCheck : MonoBehaviour
     private void clearPills()
     {
         //clear pills and then send cleared pill values to game manager
+        //
+
         float clearedValue = 0;
         
+        //clear pills
         for (int i = 0; i < deleteList.Count; i++)
         {
             if (deleteList[i] == null) continue;
@@ -98,6 +104,17 @@ public class gridCheck : MonoBehaviour
         }
 
         Actions.increaseScore(playerSide, clearedValue);
+
+        //clear parents
+        for (int i = 0; i < pillParent.transform.childCount; i++)
+        {
+            if (pillParent.transform.GetChild(i).transform.childCount == 0)
+            {
+                Destroy(pillParent.transform.GetChild(i).gameObject);
+                
+            }
+        }
+        
         deleteList.Clear();
     }
 
@@ -146,6 +163,38 @@ public class gridCheck : MonoBehaviour
         //trigger phone effect
 
         return hasConnectedPhone;
+    }
+
+    private void syringeClear()
+    {
+        //modified version of  phoneCheck()
+
+        List<GameObject> syringeList = new List<GameObject>();
+        for (int i = 0; i < deleteList.Count; i++)
+        {
+            //puts parent object in list
+            if (deleteList[i].tag == "Syringe" && !syringeList.Contains(deleteList[i].transform.parent.gameObject))
+            {
+                syringeList.Add(deleteList[i].transform.parent.gameObject);
+            }
+        }
+
+        
+        if (syringeList.Count == 0) return;
+
+        //add children to delete list
+        for (int i = 0; i < syringeList.Count; i++)
+        {
+            for (int j = 0; j < syringeList[i].transform.childCount; j++)
+            {
+                GameObject currentSyringeSection = syringeList[i].transform.GetChild(j).gameObject;
+                deleteList.Add(currentSyringeSection);
+
+            }
+
+        }
+        
+
     }
 
     private void pillCount()

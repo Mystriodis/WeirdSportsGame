@@ -59,7 +59,7 @@ public class pillSelection : MonoBehaviour
                 }
                 
             }
-            pillObject.AddComponent<pillStats>().stats = pillScriptableObject;
+            pillObject.GetComponent<pillStats>().stats = pillScriptableObject;
 
             //switches pill when selected - sends info on which pill is selected
             pillList.newPill(whichPill.currentIndex);

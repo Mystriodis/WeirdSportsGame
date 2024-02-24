@@ -139,6 +139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 722799632542804196}
+  - component: {fileID: -4128013988354134241}
   m_Layer: 0
   m_Name: phone1
   m_TagString: Untagged
@@ -166,6 +167,19 @@ Transform:
   - {fileID: 4744645465362992980}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4128013988354134241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2710400514923682318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0521c07d9c40adf4d9c34a0f17da6fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 9776e490ad6621b4db0ebafe54fe211d, type: 2}
 --- !u!1 &3237198833949720542
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +583,7 @@ GameObject:
   - component: {fileID: 3915538085920851717}
   m_Layer: 0
   m_Name: connectionPoint
-  m_TagString: Untagged
+  m_TagString: Connection
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -7,6 +7,8 @@ TagManager:
   - Pill
   - Boundary
   - Phone
+  - Syringe
+  - Connection
   layers:
   - Default
   - TransparentFX
