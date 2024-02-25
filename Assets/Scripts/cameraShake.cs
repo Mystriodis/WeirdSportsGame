@@ -17,6 +17,16 @@ public class cameraShake : MonoBehaviour
         originalPosition = transform.position;
     }
 
+    private void OnEnable()
+    {
+        Actions.shakeCamera += startShake;
+    }
+
+    private void OnDisable()
+    {
+        Actions.shakeCamera -= startShake;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -25,7 +35,6 @@ public class cameraShake : MonoBehaviour
             shake();
         }
     }
-
 
     public void startShake(int multiplier)
     {

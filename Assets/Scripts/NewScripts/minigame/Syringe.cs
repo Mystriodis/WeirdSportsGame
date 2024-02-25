@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 
 public class Syringe : MonoBehaviour
 {
@@ -16,6 +16,8 @@ public class Syringe : MonoBehaviour
     private Animator syringeAnim;                   //animator - 2 states, scrolling and end
 
     [SerializeField] minigameManager miniManager;
+
+    private bool hasInjected = false;
 
     private void Start()
     {
@@ -60,21 +62,21 @@ public class Syringe : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, targetPos, speed.Evaluate(transform.position.y) * Time.deltaTime);
         }
 
-        //"end" game on return
-        if (Input.GetKeyDown(KeyCode.Return))
-        { 
-            Inject();
-        }
+
     }
 
     //function to calculate points, play animation, freeze movement, and anything else after minigame ends
-    private void Inject()
+    public void Inject()
     {
+        if (hasInjected) return;
+
         //freeze movement
         moving = false;
         transform.position = transform.position;
         //change animation
         syringeAnim.SetTrigger("inject");
+
+        hasInjected = true;
         StartCoroutine(nameof(finishMinigame));
 
     }

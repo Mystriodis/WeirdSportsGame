@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class pillManager : MonoBehaviour
@@ -11,6 +12,7 @@ public class pillManager : MonoBehaviour
 
     //these scripts mainly just pass through input to other scripts
     public int playerSide; //1 or 2
+    
     [SerializeField] pillSelection selectionScript;   //just changed to reference new script
     [SerializeField] pillMove moveScript;
     [SerializeField] Transform gridCenter;
@@ -21,18 +23,27 @@ public class pillManager : MonoBehaviour
     [SerializeField] GameObject syringeMinigame;
     [SerializeField] GameObject gridBackground; //for setting minigame size
     [SerializeField] GameObject pillParent;
-    
-    
+
+
     public string state;
     public int pillAmount;
     private float currentCaughtPercentage;
+    private Syringe activeMinigame;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (playerSide == 1)
+        {
+            GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 1", Keyboard.current);
+        } else if (playerSide == 2)
+        {
+            GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 2", Keyboard.current);
+        }
+        
         passVariables();
         switchState("selection");
-        updateCaught();
+        updateCaught(); 
     }
 
     private void passVariables()
@@ -76,6 +87,7 @@ public class pillManager : MonoBehaviour
         minigameManager minigameScript = minigameObject.GetComponent<minigameManager>();
         minigameScript.manager = this;
         minigameScript.playerSide = playerSide;
+        activeMinigame = minigameObject.transform.Find("syringe").GetComponent<Syringe>();
     }
 
     private void updateUI()
@@ -90,5 +102,15 @@ public class pillManager : MonoBehaviour
         currentCaughtPercentage = pillAmount / (float)maxSafeAmount;
 
         updateUI();
+    }
+
+    public void useSyringe(InputAction.CallbackContext context)
+    {
+        if (state != "syringe") return;
+
+        if (context.started)
+        {
+            activeMinigame.Inject(); 
+        }
     }
 }

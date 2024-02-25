@@ -12,7 +12,6 @@ public class gridCheck : MonoBehaviour
     private List<GameObject> deleteList = new List<GameObject>();
     private pillManager manager;
     [SerializeField] UnityEvent updateCaught;
-    [SerializeField] UnityEvent lineShake;
     
     
 
@@ -42,6 +41,7 @@ public class gridCheck : MonoBehaviour
             RaycastHit2D[] rowHits = Physics2D.RaycastAll(rowCastPos, Vector2.right, gridSize.x * 2);
             RaycastHit2D[] columnHits = Physics2D.RaycastAll(columnCastPos, Vector2.down, gridSize.y * 2);
 
+
             if (rowHits.Length >= gridSize.x * 2 + 1)
             {
                 deleteList = addToList(rowHits);
@@ -66,7 +66,7 @@ public class gridCheck : MonoBehaviour
         {
             for (int i = 0; i < lineClearAmount; i++)
             {
-                lineShake.Invoke();
+                Actions.shakeCamera(1);
             }
         }
         return "";
@@ -203,6 +203,7 @@ public class gridCheck : MonoBehaviour
         int pillAmount = 0;
         for (int i = 0; i < gridSize.x*2+1; i++)
         {
+
             Vector2 columnCastPos = new Vector2(gridCorner.position.x + i, gridCorner.position.y);
             RaycastHit2D[] cast = Physics2D.RaycastAll(columnCastPos, Vector2.down, gridSize.y * 2);
             pillAmount += cast.Length;

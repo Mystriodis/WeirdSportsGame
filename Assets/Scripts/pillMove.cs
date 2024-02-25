@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class pillMove : MonoBehaviour
 {
@@ -23,14 +25,12 @@ public class pillMove : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void confirm(InputAction.CallbackContext context)
     {
         if (state != "move") return;
         if (currentPill == null) return;
 
-        movePill();
-        
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (context.started)
         {
             if (!canPlace()) return;
 
@@ -38,64 +38,32 @@ public class pillMove : MonoBehaviour
         }
     }
 
-    private void movePill()
+    public void movePill(InputAction.CallbackContext context)
     {
-        currentPill.transform.position = inputDirection() + (Vector2)currentPill.transform.position;
-        currentPill.transform.eulerAngles = new Vector3(0, 0, currentPill.transform.eulerAngles.z + (inputRotation() * 90));
+        if (state != "move") return;
+        if (currentPill == null) return;
+
+        if (context.started)
+        {
+            Vector2 direction = context.ReadValue<Vector2>();
+            if (isOutOfBounds(direction)) return;
+
+            relativePosition += direction;
+            currentPill.transform.position += (Vector3)direction;
+        }
     }
 
-    private Vector2 inputDirection()
+    public void rotate(InputAction.CallbackContext context)
     {
-        //Gets direction from input, also checks using isOutOfBounds to see whether or not the cursor can be moved upwards
-        //!!! only accounts for the cursor position, this method means that the actual pill can be moved outwards
+        if (state != "move") return;
+        if (currentPill == null) return;
 
-        Vector2 direction = Vector2.zero;
-
-        if (Input.GetKeyDown(KeyCode.W))
+        if (context.started)
         {
-            if (isOutOfBounds(Vector2.up)) return Vector2.zero;
+            int rotateDirection = (int)context.ReadValue<float>();
 
-            direction = Vector2.up;
-            relativePosition += Vector2.up;
-        } else if (Input.GetKeyDown(KeyCode.S))
-        {
-            if (isOutOfBounds(Vector2.down)) return Vector2.zero;
-
-            direction = Vector2.down;
-            relativePosition += Vector2.down;
-
-        } else if (Input.GetKeyDown(KeyCode.D))
-        {
-            if (isOutOfBounds(Vector2.right)) return Vector2.zero;
-
-            direction = Vector2.right;
-            relativePosition += Vector2.right;
-
-        } else if (Input.GetKeyDown(KeyCode.A))
-        {
-            if (isOutOfBounds(Vector2.left)) return Vector2.zero;
-
-            direction = Vector2.left;
-            relativePosition += Vector2.left;
+            currentPill.transform.eulerAngles = new Vector3(0, 0, currentPill.transform.eulerAngles.z + (rotateDirection * 90));
         }
-
-        return direction;
-    }
-
-    private int inputRotation()
-    {
-        int rotateDirection = 0;
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            rotateDirection = 1;
-
-        } else if (Input.GetKeyDown(KeyCode.Q))
-        {
-            rotateDirection = -1;
-        }
-
-        return rotateDirection;
     }
 
     private bool isOutOfBounds(Vector2 direction)
