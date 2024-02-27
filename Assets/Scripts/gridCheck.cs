@@ -12,6 +12,7 @@ public class gridCheck : MonoBehaviour
     private List<GameObject> deleteList = new List<GameObject>();
     private pillManager manager;
     [SerializeField] UnityEvent updateCaught;
+    [SerializeField] GameObject pillDestroyedTarget;
     
     
 
@@ -84,26 +85,52 @@ public class gridCheck : MonoBehaviour
 
     private void clearPills()
     {
-        //clear pills and then send cleared pill values to game manager
+        //clear pills and then fly cleared pills to the score bar
         //
 
-        float clearedValue = 0;
+        
         
         //clear pills
         for (int i = 0; i < deleteList.Count; i++)
         {
             if (deleteList[i] == null) continue;
 
-           
-            if (deleteList[i].tag == "Pill")
+            
+            GameObject currentSection = deleteList[i];
+            
+
+
+            if (currentSection.tag == "Connection")
             {
-                Pills pillGroupStats = deleteList[i].transform.parent.GetComponent<pillStats>().stats; //stats of the entire pill group
-                clearedValue += pillGroupStats.slots / pillGroupStats.strength;
+                Destroy(currentSection);
+                continue;
             }
-            Destroy(deleteList[i]);
+
+            currentSection.GetComponent<Collider2D>().enabled = false;
+            SpriteRenderer currentSpriteRenderer = currentSection.GetComponent<SpriteRenderer>();
+            currentSpriteRenderer.color = new Color(1, 1, 1, 0.5f);
+            currentSpriteRenderer.sortingLayerID = SortingLayer.NameToID("UI");
+            currentSpriteRenderer.sortingOrder = 25;
+            
+            float clearedValue = 0;
+
+            if (currentSection.tag == "Pill")
+            {
+                //calculate 
+                Pills pillGroupStats = currentSection.transform.parent.GetComponent<pillStats>().stats; //stats of the entire pill group
+                clearedValue = (float)pillGroupStats.slots / (float)pillGroupStats.strength;
+            }
+
+            pillDeath deathScript = currentSection.AddComponent<pillDeath>();
+            deathScript.target = pillDestroyedTarget;
+            deathScript.scoreAmount = clearedValue;
+            deathScript.playerSide = playerSide;
+            deathScript.setMaxDistance();
+
+
         }
 
-        Actions.increaseScore(playerSide, clearedValue);
+        //Actions.increaseScore(playerSide, clearedValue);
 
         //clear parents
         for (int i = 0; i < pillParent.transform.childCount; i++)

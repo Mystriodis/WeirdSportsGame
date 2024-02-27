@@ -29,9 +29,7 @@ public class RandomPills : MonoBehaviour
         {
             availablePills.Add(pillTypes[Random.Range(0, pillTypes.Count)]);
 
-            //duplicate the list to both players
-            //player1Pills.Add(availablePills[i]);
-            //player2Pills.Add(availablePills[i]);
+
         }
 
         //nab the pill capsules from the menu script and steal the sprite renderer
@@ -64,4 +62,6 @@ public class RandomPills : MonoBehaviour
         //remove pill from the list to prevent it from being pulled again
         availablePills.Remove(currentPill);
     }
+
+    
 }
