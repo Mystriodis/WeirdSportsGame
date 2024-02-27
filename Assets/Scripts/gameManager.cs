@@ -10,8 +10,8 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player1points = 5;
-        player2points = 5;
+        player1points = 1;
+        player2points = 1;
     }
 
     private void OnEnable()
