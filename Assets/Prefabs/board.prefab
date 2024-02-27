@@ -1031,6 +1031,7 @@ MonoBehaviour:
   pillParent: {fileID: 8863624129690728232}
   state: 
   pillAmount: -3
+  extraCaughtValue: 0
 --- !u!114 &3379030204841527891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,6 +1064,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   pillDestroyedTarget: {fileID: 0}
+  flexIcon: {fileID: 793245413821245916}
 --- !u!114 &5421507926735241077
 MonoBehaviour:
   m_ObjectHideFlags: 0

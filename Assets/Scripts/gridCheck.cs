@@ -13,7 +13,7 @@ public class gridCheck : MonoBehaviour
     private pillManager manager;
     [SerializeField] UnityEvent updateCaught;
     [SerializeField] GameObject pillDestroyedTarget;
-    
+    [SerializeField] Animator flexIcon;
     
 
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class gridCheck : MonoBehaviour
         
     }
 
-    public string pillCheck(GameObject currentPill)
+    public void pillCheck(GameObject currentPill)
     {
         int lineClearAmount = 0;
 
@@ -59,18 +59,15 @@ public class gridCheck : MonoBehaviour
 
         phoneCheck();
         syringeClear();
-        clearPills();
+        clearPills(lineClearAmount);
 
         pillCount();
 
         if (lineClearAmount > 0)
         {
-            for (int i = 0; i < lineClearAmount; i++)
-            {
-                Actions.shakeCamera(1);
-            }
+            print(lineClearAmount);
+            visualFeedback(lineClearAmount);
         }
-        return "";
     }
 
     private List<GameObject> addToList(RaycastHit2D[] hitArray)
@@ -83,7 +80,7 @@ public class gridCheck : MonoBehaviour
         return deleteList;
     }
 
-    private void clearPills()
+    private void clearPills(int lineClearAmount)
     {
         //clear pills and then fly cleared pills to the score bar
         //
@@ -123,10 +120,22 @@ public class gridCheck : MonoBehaviour
 
             pillDeath deathScript = currentSection.AddComponent<pillDeath>();
             deathScript.target = pillDestroyedTarget;
-            deathScript.scoreAmount = clearedValue;
             deathScript.playerSide = playerSide;
             deathScript.setMaxDistance();
 
+            if (lineClearAmount >= 4)
+            {
+                deathScript.scoreAmount = clearedValue * 4;
+            } else if (lineClearAmount == 3)
+            {
+                deathScript.scoreAmount = clearedValue * 2;
+            } else if (lineClearAmount == 2)
+            {
+                deathScript.scoreAmount = clearedValue * 1.5f;
+            } else
+            {
+                deathScript.scoreAmount = clearedValue;
+            }
 
         }
 
@@ -255,5 +264,32 @@ public class gridCheck : MonoBehaviour
         }
 
         return nonConnectionPointsAmount;
+    }
+
+    IEnumerator resetFlexIcon(int flexTime)
+    {
+        yield return new WaitForSeconds(flexTime);
+        flexIcon.SetInteger("beefAmount", 0);
+    }
+
+    private void visualFeedback(int lineClearAmount)
+    {
+        for (int i = 0; i < lineClearAmount; i++)
+        {
+            Actions.shakeCamera(1);
+        }
+
+        StopCoroutine(nameof(resetFlexIcon));
+
+        if (lineClearAmount >= 2)
+        {
+            flexIcon.SetInteger("beefAmount", 2);
+            StartCoroutine(resetFlexIcon(3));
+        }
+        else
+        {
+            flexIcon.SetInteger("beefAmount", 1);
+            StartCoroutine(resetFlexIcon(5));
+        }
     }
 }
