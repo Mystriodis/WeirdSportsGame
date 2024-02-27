@@ -43,13 +43,13 @@ public class gridCheck : MonoBehaviour
             RaycastHit2D[] columnHits = Physics2D.RaycastAll(columnCastPos, Vector2.down, gridSize.y * 2);
 
 
-            if (rowHits.Length >= gridSize.x * 2 + 1)
+            if (ignoreConnectionPoints(rowHits) >= gridSize.x * 2 + 1)
             {
                 deleteList = addToList(rowHits);
                 lineClearAmount++;
             }
 
-            if (columnHits.Length >= gridSize.y * 2 + 1)
+            if (ignoreConnectionPoints(columnHits) >= gridSize.y * 2 + 1)
             {
                 deleteList = addToList(columnHits);
                 lineClearAmount++;
@@ -233,10 +233,27 @@ public class gridCheck : MonoBehaviour
 
             Vector2 columnCastPos = new Vector2(gridCorner.position.x + i, gridCorner.position.y);
             RaycastHit2D[] cast = Physics2D.RaycastAll(columnCastPos, Vector2.down, gridSize.y * 2);
-            pillAmount += cast.Length;
+
+            pillAmount += ignoreConnectionPoints(cast);
         }
         
         manager.pillAmount = pillAmount;
         updateCaught.Invoke();
+    }
+
+    private int ignoreConnectionPoints(RaycastHit2D[] source)
+    {
+        int nonConnectionPointsAmount = 0;
+
+        for (int i = 0; i < source.Length; i++)
+        {
+            if (source[i].collider.tag != "Connection")
+            {
+                nonConnectionPointsAmount++;
+            }
+            
+        }
+
+        return nonConnectionPointsAmount;
     }
 }

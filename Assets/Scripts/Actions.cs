@@ -5,5 +5,6 @@ public static class Actions //static so we can call it from elsewhere in our pro
 {
     public static Action<int, float> increaseScore;
     public static Action<int> shakeCamera;
+    public static Action<int, connectionCheck> getOpponentManager;
 }
 

@@ -25,20 +25,39 @@ public class pillManager : MonoBehaviour
     [SerializeField] GameObject pillParent;
 
 
-    public string state;
-    public int pillAmount;
+    [HideInInspector] public string state;
+    [HideInInspector] public int pillAmount;
+    [HideInInspector] public int extraCaughtValue;
     private float currentCaughtPercentage;
     private Syringe activeMinigame;
 
     // Start is called before the first frame update
     void Start()
     {
+        var gamepads = Gamepad.all;
         if (playerSide == 1)
         {
-            GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 1", Keyboard.current);
+            
+
+            if (gamepads.Count >= 2)
+            {
+                GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 1", Keyboard.current, gamepads[1]);
+            } else
+            {
+                GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 1", Keyboard.current);
+            }
+           
         } else if (playerSide == 2)
         {
-            GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 2", Keyboard.current);
+            
+
+            if (gamepads.Count >= 2)
+            {
+                GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 2", Keyboard.current, gamepads[2]);
+            } else
+            {
+                GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 2", Keyboard.current);
+            }
         }
         
         passVariables();
@@ -99,7 +118,7 @@ public class pillManager : MonoBehaviour
     public void updateCaught()
     {
         int maxSafeAmount = Mathf.CeilToInt((gridSize.x * 2 + 1) * (gridSize.y * 2 + 1)*maxCaughtPercentage);
-        currentCaughtPercentage = pillAmount / (float)maxSafeAmount;
+        currentCaughtPercentage = (pillAmount + extraCaughtValue) / (float)maxSafeAmount;
 
         updateUI();
     }

@@ -1,19 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class connectionCheck : MonoBehaviour
 {
-    public string currentObject = "";
-    public bool connected = false;
-    public GameObject connectedObject, connectedObject1;
-    public pillManager manager; //set from pillMove.cs
+    [HideInInspector] public string currentObject = "";
+    [HideInInspector] public bool connected = false;
+    [HideInInspector] public GameObject connectedObject, connectedObject1;
+    [HideInInspector] public pillManager manager, opponentManager; //manager set from pillMove.cs
+    private AudioSource callSFX;
 
     // Start is called before the first frame update
     void Start()
     {
+        callSFX = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -119,6 +118,24 @@ public class connectionCheck : MonoBehaviour
         connected = true;
         connectedObject = neighborSegment.transform.parent.gameObject;
         neighborSegment.connectedObject = transform.parent.gameObject;
-        GameObject.Find("Main Camera").GetComponent<cameraShake>().startShake(1);
+        Actions.getOpponentManager(manager.playerSide, this);
+
+        StartCoroutine(call());
+
+    }
+
+    IEnumerator call()
+    {
+        for (int i = 0; i <3; i++)
+        {
+            Actions.shakeCamera(1);
+            callSFX.Play();
+            opponentManager.extraCaughtValue += 2;
+            opponentManager.updateCaught();
+            yield return new WaitForSeconds(2);
+        }
+
+        Destroy(gameObject);
+        Destroy(connectedObject);
     }
 }
