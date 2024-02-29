@@ -155,6 +155,7 @@ public class pillMove : MonoBehaviour
                 if (hit.collider.tag == "Pill") return false;
                 if (hit.collider.tag == "Boundary") return false;
                 if (hit.collider.tag == "Phone") return false;
+                if (hit.collider.tag == "Syringe") return false;
             }
         }
 
