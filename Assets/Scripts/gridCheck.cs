@@ -31,6 +31,9 @@ public class gridCheck : MonoBehaviour
     public void pillCheck(GameObject currentPill)
     {
         int lineClearAmount = 0;
+        List<float> xHitOrigins = new List<float>();
+        List<float> yHitOrigins = new List<float>();
+
 
         for (int i = 0; i < currentPill.transform.childCount; i++)
         {
@@ -41,6 +44,7 @@ public class gridCheck : MonoBehaviour
 
             RaycastHit2D[] rowHits = Physics2D.RaycastAll(rowCastPos, Vector2.right, gridSize.x * 2);
             RaycastHit2D[] columnHits = Physics2D.RaycastAll(columnCastPos, Vector2.down, gridSize.y * 2);
+
 
 
             if (ignoreConnectionPoints(rowHits) >= gridSize.x * 2 + 1)
@@ -67,6 +71,7 @@ public class gridCheck : MonoBehaviour
         {
             print(lineClearAmount);
             visualFeedback(lineClearAmount);
+            sfxManager.Instance.playSFX("lineClear");
         }
     }
 

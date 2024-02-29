@@ -109,9 +109,9 @@ public class connectionCheck : MonoBehaviour
         {
             manager.switchToSyringe();
 
-            Destroy(neighborSegment0.transform.parent);
-            Destroy(neighborSegment1.transform.parent);
-            Destroy(gameObject.transform.parent);
+            Destroy(neighborSegment0.transform.parent.gameObject);
+            Destroy(neighborSegment1.transform.parent.gameObject);
+            Destroy(gameObject.transform.parent.gameObject);
         }
 
     }
@@ -133,7 +133,7 @@ public class connectionCheck : MonoBehaviour
         for (int i = 0; i <3; i++)
         {
             Actions.shakeCamera(1);
-            callSFX.Play();
+            sfxManager.Instance.playSFX("phoneRing");
             opponentManager.extraCaughtValue += 2;
             opponentManager.updateCaught();
             yield return new WaitForSeconds(2);
@@ -141,6 +141,6 @@ public class connectionCheck : MonoBehaviour
 
         
         Destroy(connectedObject);
-        Destroy(gameObject.transform.parent);
+        Destroy(gameObject.transform.parent.gameObject);
     }
 }

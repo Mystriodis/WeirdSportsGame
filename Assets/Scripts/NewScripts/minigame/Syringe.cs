@@ -75,6 +75,8 @@ public class Syringe : MonoBehaviour
         transform.position = transform.position;
         //change animation
         syringeAnim.SetTrigger("inject");
+        //play audio
+        sfxManager.Instance.playSFX("syringeInject");
 
         hasInjected = true;
         StartCoroutine(nameof(finishMinigame));

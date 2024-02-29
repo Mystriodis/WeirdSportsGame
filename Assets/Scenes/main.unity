@@ -417,6 +417,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1082425}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &388157713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 388157715}
+  - component: {fileID: 388157714}
+  m_Layer: 0
+  m_Name: sfxManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &388157714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388157713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b3ff047d3fbcc408013d3f8d60a59b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineClearSFX: {fileID: 8300000, guid: 3499c4b7656e0d944a1fe81997afe010, type: 3}
+  phoneRingSFX: {fileID: 8300000, guid: acf7399d77a4d7f49817f2578f6e20cf, type: 3}
+  syringeInjectSFX: {fileID: 8300000, guid: 2ceb0cfdb9f56404c8d4e0a075e60305, type: 3}
+--- !u!4 &388157715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388157713}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &475262518
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +798,7 @@ Transform:
   m_GameObject: {fileID: 855594910}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.74311197, y: -0.5216461, z: -10.164744}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -767,9 +814,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5225ea7a89f61c14d850e56ca3dcbaa5, type: 3}
+  m_audioClip: {fileID: 8300000, guid: da95c8bb0135ff24a8a84a01cd6d3b93, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1318,7 +1365,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1675652327
@@ -1876,3 +1923,4 @@ SceneRoots:
   - {fileID: 574918300}
   - {fileID: 855594912}
   - {fileID: 96241635}
+  - {fileID: 388157715}

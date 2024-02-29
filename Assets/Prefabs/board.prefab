@@ -1027,7 +1027,7 @@ MonoBehaviour:
   checkScript: {fileID: 3379030204841527891}
   gridSize: {x: 4, y: 6}
   caughtCounter: {fileID: 0}
-  maxCaughtPercentage: 0.5
+  maxCaughtPercentage: 0.6
   syringeMinigame: {fileID: 7265102151261760497, guid: 57be259213308ed4199c81740345f882, type: 3}
   gridBackground: {fileID: 6403303142205864181}
   pillParent: {fileID: 8863624129690728232}

@@ -128,7 +128,7 @@ public class pillMove : MonoBehaviour
             }
         }
 
-
+        currentPill.GetComponent<AudioSource>().Play();
         GetComponent<gridCheck>().pillCheck(currentPill);
         currentPill = null;
         shake.Invoke();
