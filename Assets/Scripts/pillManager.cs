@@ -42,11 +42,10 @@ public class pillManager : MonoBehaviour
         {
             if (gamepads.Count >= 2)
             {
-                GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 1", Keyboard.current, gamepads[1]);
+                GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 1", Keyboard.current, gamepads[0]);
             } else
             {
                 GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 1", Keyboard.current);
-                GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 1", Keyboard.current, gamepads[0]);
             }
            
         } else if (playerSide == 2)
