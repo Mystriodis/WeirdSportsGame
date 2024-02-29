@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
@@ -26,11 +27,14 @@ public class gameManager : MonoBehaviour
     {
         Actions.increaseScore += increasePoints;
         Actions.getOpponentManager += getOpponentManager;
+        Actions.playerCaught += caughtEnd;
     }
 
     private void OnDisable()
     {
         Actions.increaseScore -= increasePoints;
+        Actions.getOpponentManager -= getOpponentManager;
+        Actions.playerCaught -= caughtEnd;
     }
 
     // Update is called once per frame
@@ -95,6 +99,8 @@ public class gameManager : MonoBehaviour
             timerCountDown--;
             timerDisplay.text = calculateTime(timerCountDown);
         }
+
+        normalEnd();
     }
 
     private string calculateTime(int time)
@@ -111,5 +117,34 @@ public class gameManager : MonoBehaviour
         }
 
         return minuteText + ":" + secondText;
+    }
+
+    private void normalEnd()
+    {
+        if (player1points > player2points)
+        {
+            persistentManager.Instance.ending = "player1Won";
+        } else if (player2points > player1points)
+        {
+            persistentManager.Instance.ending = "player2Won";
+        } else
+        {
+            persistentManager.Instance.ending = "tie";
+        }
+
+        SceneManager.LoadSceneAsync("gameOver");
+    }
+
+    public void caughtEnd(int caughtSide)
+    {
+        if (caughtSide == 1)
+        {
+            persistentManager.Instance.ending = "player1Caught";
+        } else if (caughtSide == 2)
+        {
+            persistentManager.Instance.ending = "player2Caught";
+        }
+
+        SceneManager.LoadSceneAsync("gameOver");
     }
 }

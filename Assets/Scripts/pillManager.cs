@@ -23,6 +23,8 @@ public class pillManager : MonoBehaviour
     [SerializeField] GameObject syringeMinigame;
     [SerializeField] GameObject gridBackground; //for setting minigame size
     [SerializeField] GameObject pillParent;
+    [SerializeField] cursor cursorScript;
+    [SerializeField] pillMenu menuScript;
 
 
     [HideInInspector] public string state;
@@ -30,6 +32,7 @@ public class pillManager : MonoBehaviour
     [HideInInspector] public int extraCaughtValue;
     private float currentCaughtPercentage;
     private Syringe activeMinigame;
+    private float bugCounter; //last ditch effort save to fix useSyringe() being called in the same frame as when syringe is built 
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +40,6 @@ public class pillManager : MonoBehaviour
         var gamepads = Gamepad.all;
         if (playerSide == 1)
         {
-            
-
             if (gamepads.Count >= 2)
             {
                 GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 1", Keyboard.current, gamepads[1]);
@@ -65,12 +66,19 @@ public class pillManager : MonoBehaviour
         updateCaught(); 
     }
 
+    private void Update()
+    {
+        bugCounter += Time.deltaTime;
+    }
     private void passVariables()
     {
         moveScript.gridSize = gridSize;
         checkScript.gridSize = gridSize;
         checkScript.playerSide = playerSide;
         checkScript.pillParent = pillParent;
+        cursorScript.playerSide = playerSide;
+        menuScript.playerSide = playerSide;
+        
         
     }
 
@@ -86,20 +94,26 @@ public class pillManager : MonoBehaviour
         GameObject newPill = Instantiate(pillPrefab, gridCenter.position, Quaternion.identity);
         newPill.transform.parent = pillParent.transform;
         moveScript.currentPill = newPill;
+
+        SpriteRenderer pillRenderer = newPill.AddComponent<SpriteRenderer>(); //for the cursor to get the center of bounds
+        moveScript.updateCursorPosition();
         
         moveScript.newPill();
         switchState("move");
+
+        bugCounter = 0;
     }
 
     public void switchToSelection()
     {
         switchState("selection");
+        menuScript.updateDisplay();
+
+        bugCounter = 0;
     }
 
     public void switchToSyringe()
     {
-
-        switchState("syringe");
         GameObject minigameObject = Instantiate(syringeMinigame);
         minigameObject.transform.position = gridBackground.transform.position;
         minigameObject.transform.localScale = gridBackground.transform.localScale;
@@ -107,6 +121,10 @@ public class pillManager : MonoBehaviour
         minigameScript.manager = this;
         minigameScript.playerSide = playerSide;
         activeMinigame = minigameObject.transform.Find("syringe").GetComponent<Syringe>();
+        switchState("syringe");
+
+        bugCounter = 0;
+
     }
 
     private void updateUI()
@@ -120,12 +138,19 @@ public class pillManager : MonoBehaviour
         int maxSafeAmount = Mathf.CeilToInt((gridSize.x * 2 + 1) * (gridSize.y * 2 + 1)*maxCaughtPercentage);
         currentCaughtPercentage = (pillAmount + extraCaughtValue) / (float)maxSafeAmount;
 
+
         updateUI();
+
+        if (currentCaughtPercentage >= 1)
+        {
+            Actions.playerCaught(playerSide);
+        }
     }
 
     public void useSyringe(InputAction.CallbackContext context)
     {
         if (state != "syringe") return;
+        if (bugCounter == 0) return;
 
         if (context.started)
         {

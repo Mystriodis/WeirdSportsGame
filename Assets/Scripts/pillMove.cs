@@ -48,6 +48,9 @@ public class pillMove : MonoBehaviour
 
             relativePosition += direction;
             currentPill.transform.position += (Vector3)direction;
+
+            updateCursorPosition();
+            
         }
     }
 
@@ -61,6 +64,7 @@ public class pillMove : MonoBehaviour
             int rotateDirection = (int)context.ReadValue<float>();
 
             currentPill.transform.eulerAngles = new Vector3(0, 0, currentPill.transform.eulerAngles.z + (rotateDirection * 90));
+            updateCursorPosition();
         }
     }
 
@@ -162,5 +166,27 @@ public class pillMove : MonoBehaviour
         //start on next frame so input for the pill placement and pill selection doesn't overlap
         yield return null;
         manager.switchToSelection();
+    }
+
+    public void updateCursorPosition()
+    {
+        //MOVE CURSOR
+        Vector2 sumVector = new Vector3(0f, 0f);
+        int connections = 0;
+
+        foreach (Transform child in currentPill.transform)
+        {
+            if (child.tag == "Connection")
+            {
+                connections++;
+                continue;
+            }
+            
+            sumVector += (Vector2)child.position;
+        }
+
+        Vector3 groupCenter = sumVector / (currentPill.transform.childCount-connections);
+
+        Actions.moveCursor(manager.playerSide, groupCenter.x, groupCenter.y, true);
     }
 }

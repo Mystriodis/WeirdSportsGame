@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class persistantManager : MonoBehaviour
+public class persistentManager : MonoBehaviour
 {
-    public static persistantManager Instance { get; private set; } //Tied to the class and not the instance itself
+    public static persistentManager Instance { get; private set; }
 
-    public string ending = ""; //player1Caught, player2Caught, player1Won, player2Won
+    public string ending = ""; //player1Caught, player2Caught, player1Won, player2Won, tie
 
     private void Awake()
     {
@@ -20,4 +21,6 @@ public class persistantManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
 }
