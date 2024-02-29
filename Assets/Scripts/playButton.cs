@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playButton : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] Button play;   //start or restart the game
+
     void Start()
     {
-        
+        play.onClick.AddListener(start);
     }
 
-    // Update is called once per frame
-    void Update()
+    void start()
     {
-        
+        //enter main game
+        SceneManager.LoadScene("main");
     }
 }
