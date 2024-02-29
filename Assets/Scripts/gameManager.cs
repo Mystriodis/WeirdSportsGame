@@ -132,7 +132,7 @@ public class gameManager : MonoBehaviour
             persistentManager.Instance.ending = "tie";
         }
 
-        SceneManager.LoadSceneAsync("gameOver");
+        SceneTransitions.instance.curtainScene("gameOver");
     }
 
     public void caughtEnd(int caughtSide)
@@ -145,6 +145,6 @@ public class gameManager : MonoBehaviour
             persistentManager.Instance.ending = "player2Caught";
         }
 
-        SceneManager.LoadSceneAsync("gameOver");
+        SceneTransitions.instance.curtainScene("gameOver");
     }
 }

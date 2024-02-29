@@ -28,7 +28,7 @@ public class replayButton : MonoBehaviour
     void play()
     {
         //enter main game
-        SceneManager.LoadScene("main");
+        SceneTransitions.instance.curtainScene("main");
     }
 
     // Update is called once per frame

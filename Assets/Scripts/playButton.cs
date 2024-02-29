@@ -16,6 +16,6 @@ public class playButton : MonoBehaviour
     void start()
     {
         //enter main game
-        SceneManager.LoadScene("main");
+        SceneTransitions.instance.curtainScene("main");
     }
 }
