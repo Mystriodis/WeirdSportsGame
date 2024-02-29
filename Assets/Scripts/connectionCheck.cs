@@ -108,6 +108,10 @@ public class connectionCheck : MonoBehaviour
         if (neighborSegment0.currentObject == target0 && neighborSegment1.currentObject == target1)
         {
             manager.switchToSyringe();
+
+            Destroy(neighborSegment0.transform.parent);
+            Destroy(neighborSegment1.transform.parent);
+            Destroy(gameObject.transform.parent);
         }
 
     }
@@ -135,7 +139,8 @@ public class connectionCheck : MonoBehaviour
             yield return new WaitForSeconds(2);
         }
 
-        Destroy(gameObject);
+        
         Destroy(connectedObject);
+        Destroy(gameObject.transform.parent);
     }
 }
