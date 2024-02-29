@@ -31,20 +31,31 @@ public class gridCheck : MonoBehaviour
     public void pillCheck(GameObject currentPill)
     {
         int lineClearAmount = 0;
-        List<float> xHitOrigins = new List<float>();
-        List<float> yHitOrigins = new List<float>();
 
+        
 
         for (int i = 0; i < currentPill.transform.childCount; i++)
         {
             Vector2 segmentPosition = currentPill.transform.GetChild(i).position;
+
+            bool hasClearedLine = false;
+
+            for (int j = 0; j < deleteList.Count; j++)
+            {
+                if (currentPill.transform.GetChild(i).gameObject == deleteList[j])
+                {
+                    hasClearedLine = true;
+                    break;
+                }
+        }
+
+            if (hasClearedLine) continue;
 
             Vector2 rowCastPos = new Vector2(gridCorner.position.x, segmentPosition.y);
             Vector2 columnCastPos = new Vector2(segmentPosition.x, gridCorner.position.y);
 
             RaycastHit2D[] rowHits = Physics2D.RaycastAll(rowCastPos, Vector2.right, gridSize.x * 2);
             RaycastHit2D[] columnHits = Physics2D.RaycastAll(columnCastPos, Vector2.down, gridSize.y * 2);
-
 
 
             if (ignoreConnectionPoints(rowHits) >= gridSize.x * 2 + 1)
