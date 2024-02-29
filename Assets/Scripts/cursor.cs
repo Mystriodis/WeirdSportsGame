@@ -19,6 +19,11 @@ public class cursor : MonoBehaviour
         Actions.moveCursor += updateCursorPosition;
     }
 
+    private void OnDisable()
+    {
+        Actions.moveCursor -= updateCursorPosition;
+    }
+
     // Update is called once per frame
     void Update()
     {
