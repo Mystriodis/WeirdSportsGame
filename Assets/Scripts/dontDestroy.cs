@@ -7,12 +7,17 @@ public class dontDestroy : MonoBehaviour
     private static GameObject sceneTransitions;
     private void Awake()
     {
-        if (sceneTransitions != null)
+        if (sceneTransitions == null)
         {
-            Destroy(sceneTransitions);
+            sceneTransitions = gameObject;
+            DontDestroyOnLoad(this);
+
+        }
+        else
+        {
+            Destroy(gameObject);
         }
 
-        sceneTransitions = gameObject;
-        DontDestroyOnLoad(this);
+        
     }
 }
