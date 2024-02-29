@@ -10,7 +10,10 @@ public class SceneTransitions : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
     public void curtainScene(string scene)
