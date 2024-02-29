@@ -46,6 +46,7 @@ public class pillManager : MonoBehaviour
             } else
             {
                 GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 1", Keyboard.current);
+                GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 1", Keyboard.current, gamepads[0]);
             }
            
         } else if (playerSide == 2)
@@ -54,7 +55,7 @@ public class pillManager : MonoBehaviour
 
             if (gamepads.Count >= 2)
             {
-                GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 2", Keyboard.current, gamepads[2]);
+                GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 2", Keyboard.current, gamepads[1]);
             } else
             {
                 GetComponent<PlayerInput>().SwitchCurrentControlScheme("Player 2", Keyboard.current);
@@ -64,6 +65,11 @@ public class pillManager : MonoBehaviour
         passVariables();
         switchState("selection");
         updateCaught(); 
+    }
+
+    private void assignInput()
+    {
+
     }
 
     private void Update()
