@@ -36,7 +36,7 @@ public class sfxManager : MonoBehaviour
 
             case "phoneRing":
                 newAudioSource.clip = phoneRingSFX;
-                newAudioSource.volume = 0.4f;
+                newAudioSource.volume = 0.2f;
                 break;
 
             case "syringeInject":

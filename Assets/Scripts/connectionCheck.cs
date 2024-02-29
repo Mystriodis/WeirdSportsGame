@@ -134,7 +134,7 @@ public class connectionCheck : MonoBehaviour
         {
             Actions.shakeCamera(1);
             sfxManager.Instance.playSFX("phoneRing");
-            opponentManager.extraCaughtValue += 2;
+            opponentManager.extraCaughtValue += 4;
             opponentManager.updateCaught();
             yield return new WaitForSeconds(2);
         }
