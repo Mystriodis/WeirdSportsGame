@@ -28,7 +28,7 @@ public class replayButton : MonoBehaviour
     void play()
     {
         //enter main game
-        SceneTransitions.instance.curtainScene("main");
+        SceneTransitions.instance.curtainScene("start");
     }
 
     // Update is called once per frame
